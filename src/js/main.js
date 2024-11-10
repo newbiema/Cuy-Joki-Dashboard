@@ -1,19 +1,11 @@
-async function deleteData(){
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success"
-          });
-        }
-      });
-  }
+Swal.fire({
+    title: 'Data berhasil ditambahkan!',
+    icon: 'success',
+    showConfirmButton: false, // Menyembunyikan tombol konfirmasi
+    timer: 2000 // Menampilkan alert selama 5 detik
+}).then(function() {
+    // Setelah SweetAlert selesai, baru lakukan redirect
+    setTimeout(function() {
+        window.location.href = 'index.php'; // Redirect ke index.php setelah 5 detik
+    }, 1000); // 5000ms = 5 detik
+});

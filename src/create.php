@@ -1,34 +1,13 @@
-<?php
-include 'services/db.php'; // Koneksi ke database
-
-// Menyimpan data ketika form dikirim
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nama_klien = $_POST['nama_klien'];
-    $jasa = $_POST['jasa'];
-    $deadline = $_POST['deadline'];
-    $harga = $_POST['harga'];
-    $status = $_POST['status'];
-
-    // Query untuk menambah data baru
-    $query = "INSERT INTO daftar_joki (nama_klien, jasa, deadline, harga, status) VALUES ('$nama_klien', '$jasa', '$deadline', '$harga', '$status')";
-
-    if ($conn->query($query) === TRUE) {
-        header("Location: index.php"); // Redirect ke halaman utama setelah berhasil menambah data
-    } else {
-        echo "Gagal menambah data: " . $conn->error;
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/output.css">
+   
     <title>Tambah Data Joki Tugas</title>
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100 font-poppins">
 
     <!-- Header -->
     <div class="bg-blue-600 text-white py-4 text-center">
@@ -68,11 +47,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
 
             <div class="flex justify-between">
-                <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Tambah Data</button>
-                <a href="index.php" class="text-blue-600 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Batal</a>
+            <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Tambah Data</button>
+                
+            <button class="bg-red-600 rounded-lg p-3 border-red-600 text-white hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"><a href="index.php">Batal</a></button>
             </div>
         </form>
     </div>
 
+    <?php
+    include 'services/db.php'; // Koneksi ke database
+
+    // Menyimpan data ketika form dikirim
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $nama_klien = $_POST['nama_klien'];
+        $jasa = $_POST['jasa'];
+        $deadline = $_POST['deadline'];
+        $harga = $_POST['harga'];
+        $status = $_POST['status'];
+
+        // Query untuk menambah data baru
+        $query = "INSERT INTO daftar_joki (nama_klien, jasa, deadline, harga, status) VALUES ('$nama_klien', '$jasa', '$deadline', '$harga', '$status')";
+
+        if ($conn->query($query) === TRUE) {
+            echo "success",
+            header("Location: index.php"); // Kembali ke halaman utama setelah menambah data
+        } else {
+            echo "Gagal menambah data: " . $conn->error;
+        }
+    }
+    ?>
+<script src="js/main.js" ></script>
 </body>
 </html>
