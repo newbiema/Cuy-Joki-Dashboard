@@ -1,6 +1,8 @@
 <?php
 include 'services/db.php'; // Koneksi ke database
 
+ob_start(); // Mulai output buffering
+
 // Memeriksa apakah ID tersedia di URL
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -9,7 +11,7 @@ if (isset($_GET['id'])) {
     $query = "SELECT * FROM daftar_joki WHERE id = $id";
     $result = $conn->query($query);
     $row = $result->fetch_assoc();
-    
+
     // Memeriksa apakah form dikirim untuk mengupdate data
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nama_klien = $_POST['nama_klien'];
@@ -22,14 +24,22 @@ if (isset($_GET['id'])) {
         $updateQuery = "UPDATE daftar_joki SET nama_klien='$nama_klien', jasa='$jasa', deadline='$deadline', harga='$harga', status='$status' WHERE id = $id";
         
         if ($conn->query($updateQuery) === TRUE) {
-            header("Location: index.php"); // Kembali ke halaman utama setelah update
+            echo "<script>
+                alert('Data berhasil diupdate!');
+                window.location = 'index.php';
+            </script>";
         } else {
-            echo "Gagal mengupdate data: " . $conn->error;
+            echo "<script>
+                alert('Gagal mengupdate data: " . $conn->error . "');
+            </script>";
         }
     }
 } else {
     header("Location: index.php");
+    exit;
 }
+
+ob_end_flush(); // Menyelesaikan output buffering
 ?>
 
 <!DOCTYPE html>
@@ -38,9 +48,9 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Data Joki Tugas</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="css/output.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 font-poppins">
 
     <!-- Container -->
     <div class="max-w-4xl mx-auto p-8 bg-white rounded-lg shadow-lg mt-8">
@@ -53,25 +63,25 @@ if (isset($_GET['id'])) {
                 <!-- Nama Klien -->
                 <div>
                     <label for="nama_klien" class="block text-gray-700 font-semibold">Nama Klien:</label>
-                    <input type="text" name="nama_klien" id="nama_klien" value="<?php echo $row['nama_klien']; ?>" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                    <input type="text" name="nama_klien" id="nama_klien" value="<?php echo htmlspecialchars($row['nama_klien']); ?>" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                 </div>
 
                 <!-- Jasa -->
                 <div>
                     <label for="jasa" class="block text-gray-700 font-semibold">Jasa:</label>
-                    <input type="text" name="jasa" id="jasa" value="<?php echo $row['jasa']; ?>" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                    <input type="text" name="jasa" id="jasa" value="<?php echo htmlspecialchars($row['jasa']); ?>" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                 </div>
 
                 <!-- Deadline -->
                 <div>
                     <label for="deadline" class="block text-gray-700 font-semibold">Deadline:</label>
-                    <input type="date" name="deadline" id="deadline" value="<?php echo $row['deadline']; ?>" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                    <input type="date" name="deadline" id="deadline" value="<?php echo htmlspecialchars($row['deadline']); ?>" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                 </div>
 
                 <!-- Harga -->
                 <div>
                     <label for="harga" class="block text-gray-700 font-semibold">Harga:</label>
-                    <input type="number" name="harga" id="harga" value="<?php echo $row['harga']; ?>" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                    <input type="number" name="harga" id="harga" value="<?php echo htmlspecialchars($row['harga']); ?>" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
                 </div>
 
                 <!-- Status -->
@@ -92,6 +102,5 @@ if (isset($_GET['id'])) {
             </div>
         </form>
     </div>
-
 </body>
 </html>

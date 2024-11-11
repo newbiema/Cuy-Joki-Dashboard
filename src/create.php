@@ -54,7 +54,12 @@
         </form>
     </div>
 
-    <?php
+
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="js/main.js" ></script>
+</body>
+
+<?php
     include 'services/db.php'; // Koneksi ke database
 
     // Menyimpan data ketika form dikirim
@@ -69,13 +74,20 @@
         $query = "INSERT INTO daftar_joki (nama_klien, jasa, deadline, harga, status) VALUES ('$nama_klien', '$jasa', '$deadline', '$harga', '$status')";
 
         if ($conn->query($query) === TRUE) {
-            echo "success",
-            header("Location: index.php"); // Kembali ke halaman utama setelah menambah data
+            echo "<script>
+                Swal.fire({
+                    title: 'Data berhasil ditambahkan!',
+                    icon: 'success',
+                    showConfirmButton: false, // Menyembunyikan tombol konfirmasi
+                    timer: 2000 // Menampilkan alert selama 2 detik
+                }).then(function() {
+                    window.location.href = 'index.php'; // Redirect ke index.php setelah SweetAlert selesai
+                });
+            </script>";
         } else {
             echo "Gagal menambah data: " . $conn->error;
         }
     }
     ?>
-<script src="js/main.js" ></script>
-</body>
+
 </html>
