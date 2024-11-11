@@ -90,7 +90,7 @@
 
     <!-- Footer -->
     <footer class="mt-10 text-center text-gray-500">
-        <p>&copy; 2024 CuyJoki. All rights reserved.</p>
+        <p>&copy; 2024 EvanFreelance. All rights reserved.</p>
     </footer>
 
 

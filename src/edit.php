@@ -55,7 +55,7 @@ ob_end_flush(); // Menyelesaikan output buffering
     <!-- Container -->
     <div class="max-w-4xl mx-auto p-8 bg-white rounded-lg shadow-lg mt-8">
 
-        <h2 class="text-3xl font-semibold text-center text-gray-700 mb-6">Edit Data Joki Tugas</h2>
+        <h2 class="text-3xl font-semibold text-center text-gray-700 mb-6">Edit Data Freelance</h2>
 
         <!-- Form -->
         <form method="POST" action="">

@@ -11,7 +11,7 @@
 
     <!-- Header -->
     <div class="bg-blue-600 text-white py-4 text-center">
-        <h1 class="text-3xl font-bold">Tambah Data Joki Tugas</h1>
+        <h1 class="text-3xl font-bold">Tambah Data Freelance</h1>
     </div>
 
     <!-- Form Section -->
