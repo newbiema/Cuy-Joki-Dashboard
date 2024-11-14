@@ -37,8 +37,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="services.php" class="flex items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
-                        <img src="img/services.png" class="h-5" alt="icon services"> <span>Layanan</span>
+                    <a href="add_admin.php" class="flex items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
+                        <img src="img/services.png" class="h-5" alt="icon services"> <span>Tambah Admin</span>
                     </a>
                 </li>
                 <li>
@@ -107,7 +107,7 @@
             </div>
 
             <!-- Display Total Pendapatan -->
-            <div class="mt-4 p-4 bg-gray-100 rounded-md text-lg font-bold text-blue-600">
+            <div class="mt-4 p-4 bg-gray-100 rounded-md text-lg font-bold text-black">
                 Total Pendapatan: Rp. <?php echo number_format($totalPendapatan, 0, ',', '.'); ?>
             </div>
         </div>
