@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/output.css">
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
-    <title>MicroServices Dashboard</title>
+    <title>Tabel Admin</title>
 </head>
 <body class="bg-gray-100 font-poppins text-gray-900">
     <!-- Navbar -->
@@ -21,13 +21,13 @@
     <!-- Main Content -->
     <div class="flex max-w-screen-xl mx-auto mt-10">
         <!-- Sidebar -->
-        <aside class="w-64 bg-blue-600  p-6 shadow-md rounded-l-lg space-y-6">
+        <aside class="w-64 bg-blue-600 text-white  p-6 shadow-md rounded-l-lg space-y-6">
             <div class="text-center">
                 <h2 class="text-xl font-bold">Admin Menu</h2>
             </div>
             <ul class="space-y-4">
                 <li>
-                    <a href="index.php" class="flex bg-white  items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
+                    <a href="index.php" class="flex items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
                         <img src="img/home.png" class="h-5" alt="icon home"> <span>Dashboard</span>
                     </a>
                 </li>
@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="admin_tabel.php" class="flex items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
+                    <a href="admin_tabel.php" class="flex text-blue-600 bg-white items-center space-x-3 hover:bg-blue-700 hover:text-white p-3 rounded-lg transition-colors">
                         <img src="img/services.png" class="h-5" alt="icon services"> <span>Lihat Admin</span>
                     </a>
                 </li>
@@ -55,18 +55,21 @@
             <div class="mb-4 text-center">
                 <h1 class="text-3xl font-poppins font-medium text-gray-700">Daftar Micro Services</h1>
             </div>
+            
+            <button class="flex mx-2 mb-2 bg-blue-500 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors">
+                <img src="img/add.png" class="h-5" alt="">
+                <a href="add_admin.php" class=""> 
+                Tambah Admin</a>
+            </button>
 
             <!-- Tabel Daftar Joki -->
             <div class="overflow-x-auto mt-4">
                 <table class="w-full text-sm text-left text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-200">
                         <tr>
-                            <th class="px-6 py-3">Nama Klien</th>
-                            <th class="px-6 py-3">Jasa</th>
-                            <th class="px-6 py-3">Deadline</th>
-                            <th class="px-6 py-3">Harga</th>
-                            <th class="px-6 py-3">Status</th>
-                            <th class="px-6 py-3">Action</th>
+                            <th class="px-6 py-3">Username</th>
+                            <th class="px-6 py-3">Password</th>
+                            <th class="px-6 py-3">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,20 +77,17 @@
                         include 'services/db.php';
 
                         // Query untuk menampilkan daftar joki
-                        $query = "SELECT * FROM daftar_joki";
+                        $query = "SELECT * FROM admin";
                         $result = $conn->query($query);
 
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr class='bg-white border-b hover:bg-gray-100 transition duration-150'>";
-                                echo "<td class='px-6 py-4'>" . $row['nama_klien'] . "</td>";
-                                echo "<td class='px-6 py-4'>" . $row['jasa'] . "</td>";
-                                echo "<td class='px-6 py-4'>" . $row['deadline'] . "</td>";
-                                echo "<td class='px-6 py-4'>" . number_format($row['harga'], 0, ',', '.') . "</td>";
-                                echo "<td class='px-6 py-4'>" . $row['status'] . "</td>";
+                                echo "<td class='px-6 py-4'>" . $row['username'] . "</td>";
+                                echo "<td class='px-6 py-4'>" . $row['password'] . "</td>";
                                 echo "<td class='px-6 py-4 space-x-2'>
-                                        <a href='edit.php?id=" . $row['id'] . "' class='text-blue-500 hover:text-blue-700'><img class='h-5' src='img/edit.png' alt='icon edit'></a>
-                                        <a href='delete.php?id=" . $row['id'] . "' class='text-red-500 hover:text-red-700 delete-link'><img class='h-5' src='img/delete.png' alt='icon delete'></a>
+                                        <a href='edit_admin.php?id=" . $row['id'] . "' class='text-blue-500 hover:text-blue-700'><img class='h-5' src='img/edit.png' alt='icon edit'></a>
+                                        <a href='delete_admin.php?id=" . $row['id'] . "' class='text-red-500 hover:text-red-700 delete-link'><img class='h-5' src='img/delete.png' alt='icon delete'></a>
                                       </td>";
                                 echo "</tr>";
                             }
@@ -95,21 +95,13 @@
                             echo "<tr><td colspan='7' class='text-center py-4 text-gray-600'>Tidak ada data joki tugas.</td></tr>";
                         }
 
-                        // Query untuk menghitung total pendapatan
-                        $queryTotal = "SELECT SUM(harga) AS total_pendapatan FROM daftar_joki";
-                        $resultTotal = $conn->query($queryTotal);
-                        $totalPendapatan = $resultTotal->fetch_assoc()['total_pendapatan'];
-
-                        $conn->close();
+                  
                         ?>
                     </tbody>
                 </table>
             </div>
 
-            <!-- Display Total Pendapatan -->
-            <div class="mt-4 text-center p-4 bg-gray-100 rounded-md text-lg font-bold text-black">
-                Total Pendapatan: Rp. <?php echo number_format($totalPendapatan, 0, ',', '.'); ?>
-            </div>
+            
         </div>
     </div>
 
@@ -140,7 +132,7 @@
                     cancelButtonText: "Batal"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = `delete.php?id=${id}`;
+                        window.location.href = `delete_admin.php?id=${id}`;
                     }
                 });
             });

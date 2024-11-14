@@ -1,7 +1,7 @@
 <?php
 // db.php
 $host = 'localhost';
-$dbname = 'cuyjoki'; // Ganti dengan nama database Anda
+$dbname = 'cuyjoki'; 
 $user = 'root';
 $password = '';
 
