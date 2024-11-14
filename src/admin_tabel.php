@@ -12,8 +12,8 @@
     <nav class="bg-blue-500 w-auto shadow-md p-4">
         <div class="max-w-screen-xl mx-auto flex justify-between items-center">
             <a href="https://cuyjoki.vercel.app/" class="flex items-center space-x-3">
-                <img src="img/logo.png" class="h-8" alt="Logo CuyJoki" />
-                <span class="text-2xl font-poppins font-bold text-white">Micro Services</span>
+                <img  src="img/logo.png" class="h-8 " alt="Logo CuyJoki" />
+                <span class="text-2xl font-poppins font-bold text-white ">Micro Services</span>
             </a>
         </div>
     </nav>
@@ -31,11 +31,7 @@
                         <img src="img/home.png" class="h-5" alt="icon home"> <span>Dashboard</span>
                     </a>
                 </li>
-                <li>
-                    <a href="create.php" class="flex items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
-                        <img src="img/add.png" class="h-5" alt="icon add"> <span>Tambah Data Klien</span>
-                    </a>
-                </li>
+
                 <li>
                     <a href="admin_tabel.php" class="flex text-blue-600 bg-white items-center space-x-3 hover:bg-blue-700 hover:text-white p-3 rounded-lg transition-colors">
                         <img src="img/services.png" class="h-5" alt="icon services"> <span>Lihat Admin</span>
@@ -56,11 +52,14 @@
                 <h1 class="text-3xl font-poppins font-medium text-gray-700">Daftar Micro Services</h1>
             </div>
             
-            <button class="flex mx-2 mb-2 bg-blue-500 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors">
-                <img src="img/add.png" class="h-5" alt="">
-                <a href="add_admin.php" class=""> 
-                Tambah Admin</a>
+            <button class="inline-flex justify-between border  text-white border-blue-600 items-center px-4 py-2 bg-blue-600 transition ease-in-out delay-75 hover:bg-white hover:text-blue-600 text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110">
+                <img class="h-5" src="img/add.png" alt="">
+                    <a class="p-1" href="add_admin.php">
+                        Add Admin
+                    </a>
             </button>
+
+
 
             <!-- Tabel Daftar Joki -->
             <div class="overflow-x-auto mt-4">
@@ -106,7 +105,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="mt-10 text-center text-gray-500">
+    <footer class="mt-10 text-center text-gray-500 ">
         <p>&copy; 2024 EvanFreelance. All rights reserved.</p>
     </footer>
 

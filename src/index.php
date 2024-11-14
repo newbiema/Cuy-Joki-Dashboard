@@ -17,23 +17,18 @@
             </a>
         </div>
     </nav>
-
+    
     <!-- Main Content -->
     <div class="flex max-w-screen-xl mx-auto mt-10">
         <!-- Sidebar -->
-        <aside class="w-64 bg-blue-600  p-6 shadow-md rounded-l-lg space-y-6">
+        <aside class="w-64 bg-blue-600  p-6 shadow-md rounded-l-lg text-white space-y-6">
             <div class="text-center">
                 <h2 class="text-xl font-bold">Admin Menu</h2>
             </div>
             <ul class="space-y-4">
                 <li>
-                    <a href="index.php" class="flex bg-white  items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
+                    <a href="index.php" class="flex bg-white text-blue-600 hover:text-white  items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
                         <img src="img/home.png" class="h-5" alt="icon home"> <span>Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="create.php" class="flex items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
-                        <img src="img/add.png" class="h-5" alt="icon add"> <span>Tambah Data Klien</span>
                     </a>
                 </li>
                 <li>
@@ -56,6 +51,24 @@
                 <h1 class="text-3xl font-poppins font-medium text-gray-700">Daftar Micro Services</h1>
             </div>
 
+
+        
+<button
+  class="inline-flex justify-between border  text-white border-blue-600 items-center px-4 py-2 bg-blue-600 transition ease-in-out delay-75 hover:bg-white hover:text-blue-600 text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
+>
+<img class="h-5" src="img/add.png" alt="">
+
+<a class="p-1" href="create.php">
+     Add Client
+</a>
+
+
+</button>
+
+
+
+
+
             <!-- Tabel Daftar Joki -->
             <div class="overflow-x-auto mt-4">
                 <table class="w-full text-sm text-left text-gray-500">
@@ -76,6 +89,8 @@
                         // Query untuk menampilkan daftar joki
                         $query = "SELECT * FROM daftar_joki";
                         $result = $conn->query($query);
+
+                     // Memeriksa apakah ada data joki tugas
 
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
