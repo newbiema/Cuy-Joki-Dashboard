@@ -21,13 +21,13 @@
     <!-- Main Content -->
     <div class="flex max-w-screen-xl mx-auto mt-10">
         <!-- Sidebar -->
-        <aside class="w-64 bg-blue-600  p-6 shadow-md rounded-l-lg text-white space-y-6">
+        <aside class="w-64 bg-gray-200 p-6 shadow-md rounded-l-lg text-white space-y-6">
             <div class="text-center">
-                <h2 class="text-xl font-bold">Admin Menu</h2>
+                <h2 class="text-xl text-black font-bold">Admin Menu</h2>
             </div>
-            <ul class="space-y-4">
+            <ul class="space-y-4 text-black">
                 <li>
-                    <a href="index.php" class="flex bg-white text-blue-600 hover:text-white  items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
+                    <a href="index.php" class="flex bg-white  hover:text-white  items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
                         <img src="img/home.png" class="h-5" alt="icon home"> <span>Dashboard</span>
                     </a>
                 </li>

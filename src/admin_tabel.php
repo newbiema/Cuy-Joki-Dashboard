@@ -21,7 +21,7 @@
     <!-- Main Content -->
     <div class="flex max-w-screen-xl mx-auto mt-10">
         <!-- Sidebar -->
-        <aside class="w-64 bg-blue-600 text-white  p-6 shadow-md rounded-l-lg space-y-6">
+        <aside class="w-64 bg-gray-200 text-black  p-6 shadow-md rounded-l-lg space-y-6">
             <div class="text-center">
                 <h2 class="text-xl font-bold">Admin Menu</h2>
             </div>
