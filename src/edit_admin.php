@@ -47,6 +47,7 @@ ob_end_flush(); // Menyelesaikan output buffering
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Data Admin</title>
     <link href="css/output.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
 </head>
 <body class="bg-gray-100 font-poppins">
 
