@@ -1,5 +1,5 @@
 <?php
-include 'services/db.php'; // Koneksi ke database
+include '../services/db.php'; // Koneksi ke database
 
 ob_start(); // Mulai output buffering
 
@@ -46,8 +46,8 @@ ob_end_flush(); // Menyelesaikan output buffering
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Data Admin</title>
-    <link href="css/output.css" rel="stylesheet">
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link href="../css/output.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
 </head>
 <body class="bg-gray-100 font-poppins">
 

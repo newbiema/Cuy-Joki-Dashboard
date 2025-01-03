@@ -7,35 +7,40 @@ ob_start(); // Mulai output buffering
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Mengambil data berdasarkan ID
-    $query = "SELECT * FROM daftar_joki WHERE id = $id";
-    $result = $conn->query($query);
+    // Mengambil data berdasarkan ID menggunakan prepared statements
+    $query = "SELECT * FROM daftar_joki WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $id);  // Mengikat parameter ID
+    $stmt->execute();
+    $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
     // Memeriksa apakah form dikirim untuk mengupdate data
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nama_klien = $_POST['nama_klien'];
-        $jasa = $_POST['jasa'];
+        $jasa = $_POST['jasa'];  // Nama jasa yang dipilih
         $deadline = $_POST['deadline'];
         $harga = $_POST['harga'];
         $status = $_POST['status'];
 
-        // Query update data
-        $updateQuery = "UPDATE daftar_joki SET nama_klien='$nama_klien', jasa='$jasa', deadline='$deadline', harga='$harga', status='$status' WHERE id = $id";
-        
-        if ($conn->query($updateQuery) === TRUE) {
+        // Query update data menggunakan prepared statement
+        $updateQuery = "UPDATE daftar_joki SET nama_klien = ?, jasa = ?, deadline = ?, harga = ?, status = ? WHERE id = ?";
+        $stmtUpdate = $conn->prepare($updateQuery);
+        $stmtUpdate->bind_param("sssssi", $nama_klien, $jasa, $deadline, $harga, $status, $id);
+
+        if ($stmtUpdate->execute()) {
             echo "<script>
                 alert('Data berhasil diupdate!');
-                window.location = 'index.php';
+                window.location = 'main_dashboard.php';
             </script>";
         } else {
             echo "<script>
-                alert('Gagal mengupdate data: " . $conn->error . "');
+                alert('Gagal mengupdate data: " . $stmtUpdate->error . "');
             </script>";
         }
     }
 } else {
-    header("Location: index.php");
+    header("Location: main_dashboard.php");
     exit;
 }
 
@@ -59,6 +64,7 @@ ob_end_flush(); // Menyelesaikan output buffering
 
         <!-- Form -->
         <form method="POST" action="">
+
             <div class="space-y-4">
                 <!-- Nama Klien -->
                 <div>
@@ -69,7 +75,23 @@ ob_end_flush(); // Menyelesaikan output buffering
                 <!-- Jasa -->
                 <div>
                     <label for="jasa" class="block text-gray-700 font-semibold">Jasa:</label>
-                    <input type="text" name="jasa" id="jasa" value="<?php echo htmlspecialchars($row['jasa']); ?>" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                    <select name="jasa" id="jasa" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                        <?php
+                            // Menampilkan jasa yang tersedia dalam dropdown
+                            $serviceQuery = "SELECT id, nama_layanan FROM services";
+                            $serviceResult = $conn->query($serviceQuery);
+
+                            if ($serviceResult->num_rows > 0) {
+                                while ($serviceRow = $serviceResult->fetch_assoc()) {
+                                    // Jika ID jasa pada tabel 'daftar_joki' sama dengan ID pada tabel 'services', maka pilih yang sesuai
+                                    $selected = ($serviceRow['nama_layanan'] == $row['jasa']) ? 'selected' : '';
+                                    echo "<option value='" . $serviceRow['nama_layanan'] . "' $selected>" . $serviceRow['nama_layanan'] . "</option>";
+                                }
+                            } else {
+                                echo "<option value=''>Tidak ada jasa tersedia</option>";
+                            }
+                        ?>
+                    </select>
                 </div>
 
                 <!-- Deadline -->
@@ -97,7 +119,7 @@ ob_end_flush(); // Menyelesaikan output buffering
                 <!-- Buttons -->
                 <div class="flex justify-between">
                     <button type="submit" class="bg-blue-500 text-white font-semibold py-2 px-6 rounded-md hover:bg-blue-600">Update Data</button>
-                    <a href="index.php" class="bg-red-600 text-white font-semibold py-2 px-6 rounded-md hover:bg-red-700">Batal</a>
+                    <a href="main_dashboard.php" class="bg-red-600 text-white font-semibold py-2 px-6 rounded-md hover:bg-red-700">Batal</a>
                 </div>
             </div>
         </form>

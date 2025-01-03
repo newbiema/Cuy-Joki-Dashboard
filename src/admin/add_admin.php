@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/output.css">
+    <link rel="stylesheet" href="../css/output.css">
    
     <title>Tambah Data Admin</title>
 </head>
@@ -30,7 +30,7 @@
             <div class="flex justify-between">
             <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Tambah Data</button>
                 
-            <button class="bg-red-600 rounded-lg p-3 border-red-600 text-white hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"><a href="index.php">Batal</a></button>
+            <button class="bg-red-600 rounded-lg p-3 border-red-600 text-white hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"><a href="admin_tabel.php">Batal</a></button>
             </div>
         </form>
     </div>
@@ -41,7 +41,7 @@
 </body>
 
 <?php
-    include 'services/db.php'; // Koneksi ke database
+    include '../services/db.php'; // Koneksi ke database
 
     // Menyimpan data ketika form dikirim
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -60,7 +60,7 @@
                     showConfirmButton: false, // Menyembunyikan tombol konfirmasi
                     timer: 2000 // Menampilkan alert selama 2 detik
                 }).then(function() {
-                    window.location.href = 'index.php'; // Redirect ke index.php setelah SweetAlert selesai
+                    window.location.href = 'admin_tabel.php'; // Redirect ke admin_table.php setelah SweetAlert selesai
                 });
             </script>";
         } else {

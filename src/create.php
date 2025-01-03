@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/output.css">
-   
     <title>Tambah Data Joki Tugas</title>
 </head>
 <body class="bg-gray-100 font-poppins">
@@ -24,7 +23,23 @@
 
             <div>
                 <label for="jasa" class="block text-gray-700">Jasa:</label>
-                <input type="text" id="jasa" name="jasa" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                <select id="jasa" name="jasa" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="">-- Pilih Jasa --</option>
+                    <?php
+                        include 'services/db.php'; // Koneksi ke database
+
+                        // Query untuk mengambil data dari tabel services
+                        $result = $conn->query("SELECT id, nama_layanan, harga FROM services");
+
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<option value='" . $row['nama_layanan'] . "' data-id='" . $row['id'] . "' data-harga='" . $row['harga'] . "'>" . $row['nama_layanan'] . "</option>";
+                            }
+                        } else {
+                            echo "<option value=''>Tidak ada jasa tersedia</option>";
+                        }
+                    ?>
+                </select>
             </div>
 
             <div>
@@ -34,7 +49,7 @@
 
             <div>
                 <label for="harga" class="block text-gray-700">Harga:</label>
-                <input type="number" id="harga" name="harga" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                <input type="number" id="harga" name="harga" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" readonly required>
             </div>
 
             <div>
@@ -47,25 +62,36 @@
             </div>
 
             <div class="flex justify-between">
-            <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Tambah Data</button>
-                
-            <button class="bg-red-600 rounded-lg p-3 border-red-600 text-white hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"><a href="index.php">Batal</a></button>
+                <button type="submit" class="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Tambah Data</button>
+                <button class="bg-red-600 rounded-lg p-3 border-red-600 text-white hover:bg-red-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <a href="main_dashboard.php">Batal</a>
+                </button>
             </div>
         </form>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Mengambil elemen jasa dan harga
+        const jasaSelect = document.getElementById('jasa');
+        const hargaInput = document.getElementById('harga');
 
- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="js/main.js" ></script>
+        // Menambahkan event listener untuk menangani perubahan pada pilihan jasa
+        jasaSelect.addEventListener('change', function() {
+            // Mendapatkan harga dari data attribute
+            const selectedOption = jasaSelect.options[jasaSelect.selectedIndex];
+            const harga = selectedOption.getAttribute('data-harga');
+            hargaInput.value = harga; // Mengisi input harga dengan nilai yang diambil dari data attribute
+        });
+    </script>
 </body>
 
 <?php
-    include 'services/db.php'; // Koneksi ke database
-
     // Menyimpan data ketika form dikirim
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nama_klien = $_POST['nama_klien'];
-        $jasa = $_POST['jasa'];
+        $jasa = $_POST['jasa']; // Nama jasa yang dipilih
         $deadline = $_POST['deadline'];
         $harga = $_POST['harga'];
         $status = $_POST['status'];
@@ -78,16 +104,16 @@
                 Swal.fire({
                     title: 'Data berhasil ditambahkan!',
                     icon: 'success',
-                    showConfirmButton: false, // Menyembunyikan tombol konfirmasi
-                    timer: 2000 // Menampilkan alert selama 2 detik
+                    showConfirmButton: false,
+                    timer: 2000
                 }).then(function() {
-                    window.location.href = 'index.php'; // Redirect ke index.php setelah SweetAlert selesai
+                    window.location.href = 'main_dashboard.php';
                 });
             </script>";
         } else {
             echo "Gagal menambah data: " . $conn->error;
         }
     }
-    ?>
+?>
 
 </html>

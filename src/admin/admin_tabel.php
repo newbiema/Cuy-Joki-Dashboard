@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/output.css">
+    <link rel="stylesheet" href="../css/output.css">
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
     <title>Tabel Admin</title>
 </head>
@@ -12,7 +12,7 @@
     <nav class="bg-blue-500 w-auto shadow-md p-4">
         <div class="max-w-screen-xl mx-auto flex justify-between items-center">
             <a href="https://cuyjoki.vercel.app/" class="flex items-center space-x-3">
-                <img  src="img/logo.png" class="h-8 " alt="Logo CuyJoki" />
+                <img  src="../img/logo.png" class="h-8 " alt="Logo CuyJoki" />
                 <span class="text-2xl font-poppins font-bold text-white ">Micro Services</span>
             </a>
         </div>
@@ -27,19 +27,27 @@
             </div>
             <ul class="space-y-4">
                 <li>
-                    <a href="index.php" class="flex items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
-                        <img src="img/home.png" class="h-5" alt="icon home"> <span>Dashboard</span>
+                    <a href="../main_dashboard.php" class="flex items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
+                        <img src="../img/home.png" class="h-5" alt="icon home"> <span>Dashboard</span>
+                    </a>
+                </li>
+
+                
+                <li>
+                    <a href="admin_tabel.php" class="flex text-blue-600 bg-white items-center space-x-3 hover:bg-blue-700 hover:text-white p-3 rounded-lg transition-colors">
+                        <img src="../img/services.png" class="h-5" alt="icon services"> <span>Lihat Admin</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="admin_tabel.php" class="flex text-blue-600 bg-white items-center space-x-3 hover:bg-blue-700 hover:text-white p-3 rounded-lg transition-colors">
-                        <img src="img/services.png" class="h-5" alt="icon services"> <span>Lihat Admin</span>
+                    <a href="../layanan/services_table.php" class="flex  items-center space-x-3 hover:bg-blue-700 hover:text-white p-3 rounded-lg transition-colors">
+                        <img src="../img/services.png" class="h-5" alt="icon services"> <span>Lihat Services</span>
                     </a>
                 </li>
+                
                 <li>
-                    <a href="login.php" class="flex items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
-                        <img src="img/logout.png" class="h-5" alt="icon logout"> <span>Logout</span>
+                    <a href="../index.php" class="flex items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
+                        <img src="../img/logout.png" class="h-5" alt="icon logout"> <span>Logout</span>
                     </a>
                 </li>
             </ul>
@@ -73,7 +81,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        include 'services/db.php';
+                        include '../services/db.php';
 
                         // Query untuk menampilkan daftar joki
                         $query = "SELECT * FROM admin";
@@ -85,8 +93,8 @@
                                 echo "<td class='px-6 py-4'>" . $row['username'] . "</td>";
                                 echo "<td class='px-6 py-4'>" . $row['password'] . "</td>";
                                 echo "<td class='px-6 py-4 space-x-2'>
-                                        <a href='edit_admin.php?id=" . $row['id'] . "' class='text-blue-500 hover:text-blue-700'><img class='h-5' src='img/edit.png' alt='icon edit'></a>
-                                        <a href='delete_admin.php?id=" . $row['id'] . "' class='text-red-500 hover:text-red-700 delete-link'><img class='h-5' src='img/delete.png' alt='icon delete'></a>
+                                        <a href='edit_admin.php?id=" . $row['id'] . "' class='text-blue-500 hover:text-blue-700'><img class='h-5' src='../img/edit.png' alt='icon edit'></a>
+                                        <a href='delete_admin.php?id=" . $row['id'] . "' class='text-red-500 hover:text-red-700 delete-link'><img class='h-5' src='../img/delete.png' alt='icon delete'></a>
                                       </td>";
                                 echo "</tr>";
                             }
