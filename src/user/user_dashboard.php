@@ -10,8 +10,22 @@ if (!isset($_SESSION['user_id'])) {
 // Mengambil data pengguna yang login dari session
 $user_id = $_SESSION['user_id'];
 $user_name = $_SESSION['user_name'];
-$profile_pic = isset($_SESSION['profile_pic']) ? $_SESSION['profile_pic'] : 'default_profil.jpeg'; // Gambar profil default jika tidak ada
-$target_dir = "../img/uploads/";
+
+// Menyambung ke database dan mengambil gambar profil pengguna
+include '../services/db.php';
+
+// Query untuk mendapatkan data pengguna berdasarkan user_id
+$query = "SELECT profile_pic FROM users WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->store_result();
+$stmt->bind_result($profile_pic);
+$stmt->fetch();
+$stmt->close();
+
+// Jika tidak ada gambar profil yang tersimpan, gunakan gambar default
+$profile_pic = $profile_pic ? $profile_pic : 'default_profil.jpeg';
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +48,7 @@ $target_dir = "../img/uploads/";
             <span class="text-2xl font-poppins font-bold text-white">Micro Services</span>
         </a>
         <div class="text-white space-y-4">
+            <!-- Menampilkan foto profil pengguna -->
             <img src="<?php echo htmlspecialchars("../img/uploads/$profile_pic"); ?>" class="h-12 w-12 rounded-full mb-4" alt="Profile Picture">
             <span class="text-lg font-semibold text-yellow-300 block"><?php echo htmlspecialchars($user_name); ?></span> <!-- Menonjolkan username -->
             <a href="edit_profil.php" class="block text-sm hover:text-blue-300">Edit Profil</a>
@@ -55,6 +70,7 @@ $target_dir = "../img/uploads/";
         </div>
         <!-- User Profile Section (Visible on Desktop) -->
         <div class="hidden lg:flex items-center space-x-3 text-white">
+            <!-- Menampilkan foto profil pengguna -->
             <img src="<?php echo htmlspecialchars("../img/uploads/$profile_pic"); ?>" class="h-8 w-8 rounded-full" alt="Profile Picture">
             <span class="text-sm"><?php echo htmlspecialchars($user_name); ?></span>
             <a href="edit_profil.php" class="text-white text-sm hover:text-blue-300">Edit Profil</a>
@@ -74,8 +90,6 @@ $target_dir = "../img/uploads/";
     <!-- Microservices List -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
         <?php
-        include '../services/db.php';
-
         // Query untuk mendapatkan daftar microservices
         $query = "SELECT * FROM services";
         $result = $conn->query($query);
@@ -103,9 +117,25 @@ $target_dir = "../img/uploads/";
 </div>
 
 <!-- Footer -->
-<footer class="mt-10 text-center text-gray-500 py-4">
+<footer class="mt-10 text-center text-gray-500">
+    <div class="flex justify-center space-x-6 mb-4">
+        <!-- Social Media Icons -->
+        <a href="https://www.instagram.com/yourusername" target="_blank" class="text-gray-500 hover:text-blue-500">
+            <img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram" class="w-6 h-6">
+        </a>
+        <a href="https://twitter.com/yourusername" target="_blank" class="text-gray-500 hover:text-blue-500">
+            <img src="https://img.icons8.com/ios-filled/50/000000/twitter.png" alt="Twitter" class="w-6 h-6">
+        </a>
+        <a href="https://www.facebook.com/yourusername" target="_blank" class="text-gray-500 hover:text-blue-500">
+            <img src="https://img.icons8.com/ios-filled/50/000000/facebook.png" alt="Facebook" class="w-6 h-6">
+        </a>
+        <a href="https://www.linkedin.com/in/yourusername" target="_blank" class="text-gray-500 hover:text-blue-500">
+            <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="LinkedIn" class="w-6 h-6">
+        </a>
+    </div>
     <p>&copy; 2024 EvanFreelance. All rights reserved.</p>
 </footer>
+
 
 <!-- JavaScript to Toggle Sidebar -->
 <script>

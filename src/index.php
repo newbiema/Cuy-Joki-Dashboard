@@ -33,6 +33,10 @@
                     Belum punya akun? 
                     <a href="register.php" class="text-blue-600 hover:underline">Daftar di sini</a>
                 </p>
+                <p class="text-center mt-4">
+                    Lupa Password? 
+                    <a href="forgot_password.php" class="text-blue-600 hover:underline">Klik Disini</a>
+                </p>
             </div>
         </div>
     </div>
