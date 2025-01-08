@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $mail->Port = 587;
 
                 // Pengirim dan penerima
-                $mail->setFrom('evanjamaq123@gmail.com', 'Admin CuyJoki');
+                $mail->setFrom('evanjamaq123@gmail.com', 'Admin CuySolustions');
                 $mail->addAddress($email, $username);
 
                 // Konten email

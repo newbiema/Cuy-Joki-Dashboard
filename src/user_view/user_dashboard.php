@@ -45,7 +45,7 @@ $result_orders = $stmt_orders->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/output.css">
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
-    <title>MicroServices User Dashboard</title>
+    <title>CuySolutions</title>
     <script src="https://cdn.tailwindcss.com"></script> <!-- Import Tailwind CSS -->
 </head>
 <body class="bg-gray-100 font-poppins text-gray-900">
@@ -72,7 +72,7 @@ $result_orders = $stmt_orders->get_result();
     <div class="max-w-screen-xl mx-auto flex justify-between items-center">
         <a href="https://cuyjoki.vercel.app/" class="flex items-center space-x-3">
             <img src="../img/logo.png" class="h-8" alt="Logo CuyJoki" />
-            <span class="text-2xl font-poppins font-bold text-white">Micro Services</span>
+            <span class="text-2xl font-poppins font-bold text-white">CuySolutions</span>
         </a>
         <!-- Hamburger Menu (Visible on Mobile) -->
         <div class="lg:hidden flex items-center">
@@ -186,7 +186,7 @@ $result_orders = $stmt_orders->get_result();
             <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="LinkedIn" class="w-6 h-6">
         </a>
     </div>
-    <p>&copy; 2024 EvanFreelance. All rights reserved.</p>
+    <p>&copy; 2024 CuySolutions. All rights reserved.</p>
 </footer>
 
 

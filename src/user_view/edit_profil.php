@@ -86,7 +86,7 @@ $conn->close();
         <div class="max-w-screen-xl mx-auto flex justify-between items-center">
             <a href="user_dashboard.php" class="flex items-center space-x-3">
                 <img src="../img/logo.png" class="h-8" alt="Logo">
-                <span class="text-2xl font-poppins font-bold text-white">Micro Services</span>
+                <span class="text-2xl font-poppins font-bold text-white">CuySolutions</span>
             </a>
         </div>
     </nav>
@@ -95,22 +95,36 @@ $conn->close();
     <div class="max-w-screen-xl mx-auto mt-10 px-4">
         <h1 class="text-3xl font-bold text-gray-700 text-center">Edit Profil</h1>
         <form action="edit_profil.php" method="POST" enctype="multipart/form-data" class="max-w-sm mx-auto mt-6 bg-white p-6 rounded-lg shadow-lg">
+            <!-- Foto Profil -->
+            <div class="mb-4 text-center">
+                <img src="../img/uploads/<?php echo htmlspecialchars($profile_pic); ?>" alt="Foto Profil" class="w-32 h-32 rounded-full mx-auto">
+            </div>
+
+            <!-- Username (Tidak Bisa Diedit) -->
             <div class="mb-4">
                 <label for="username" class="block text-gray-700 text-sm font-semibold">Username</label>
-                <input type="text" name="username" id="username" class="mt-2 p-2 border rounded w-full" value="<?php echo htmlspecialchars($username); ?>" required>
+                <input type="text" name="username" id="username" class="mt-2 p-2 border rounded w-full" value="<?php echo htmlspecialchars($username); ?>" readonly required>
             </div>
+
+            <!-- Email (Tidak Bisa Diedit) -->
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 text-sm font-semibold">Email</label>
-                <input type="email" name="email" id="email" class="mt-2 p-2 border rounded w-full" value="<?php echo htmlspecialchars($email); ?>" required>
+                <input type="email" name="email" id="email" class="mt-2 p-2 border rounded w-full" value="<?php echo htmlspecialchars($email); ?>" readonly required>
             </div>
+
+            <!-- Password -->
             <div class="mb-4">
                 <label for="password" class="block text-gray-700 text-sm font-semibold">Password</label>
                 <input type="password" name="password" id="password" class="mt-2 p-2 border rounded w-full" placeholder="Kosongkan jika tidak ingin mengubah password">
             </div>
+
+            <!-- Gambar Profil -->
             <div class="mb-4">
                 <label for="profile_pic" class="block text-gray-700 text-sm font-semibold">Gambar Profil</label>
                 <input type="file" name="profile_pic" id="profile_pic" class="mt-2 p-2 border rounded w-full">
             </div>
+
+            <!-- Button untuk update profil -->
             <button type="submit" class="w-full px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-300">Update Profil</button>
         </form>
     </div>

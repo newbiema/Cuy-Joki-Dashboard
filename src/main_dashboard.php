@@ -86,6 +86,15 @@
                             FROM orders
                             INNER JOIN users ON orders.user_id = users.id";
 
+                            // Query untuk menghitung total pendapatan
+                        $queryTotal = "SELECT SUM(total_price) AS totalPendapatan FROM orders";
+                        $resultTotal = $conn->query($queryTotal);
+
+                        $totalPendapatan = 0;
+                        if ($resultTotal && $rowTotal = $resultTotal->fetch_assoc()) {
+                            $totalPendapatan = $rowTotal['totalPendapatan'];
+                        }
+
 
                         $result = $conn->query($query);
 
@@ -142,7 +151,7 @@
                 <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="LinkedIn" class="w-6 h-6">
             </a>
         </div>
-        <p>&copy; 2024 EvanFreelance. All rights reserved.</p>
+        <p>&copy; 2024 CuySolutions. All rights reserved.</p>
     </footer>
 
     <!-- SweetAlert untuk konfirmasi hapus -->
@@ -167,7 +176,7 @@
                     cancelButtonText: "Batal"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = `delete_order.php?id=${id}`;
+                        window.location.href = `delete.php?id=${id}`;
                     }
                 });
             });

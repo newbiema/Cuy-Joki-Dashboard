@@ -13,7 +13,7 @@
         <div class="max-w-screen-xl mx-auto flex justify-between items-center">
             <a href="https://cuyjoki.vercel.app/" class="flex items-center space-x-3">
                 <img src="../img/logo.png" class="h-8" alt="Logo CuyJoki" />
-                <span class="text-2xl font-poppins font-bold text-white">Micro Services</span>
+                <span class="text-2xl font-poppins font-bold text-white">CuySolustions</span>
             </a>
         </div>
     </nav>

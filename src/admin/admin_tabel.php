@@ -63,7 +63,7 @@
         <div class="flex-1 p-6 bg-white rounded-r-lg shadow-md">
             <!-- Header Section -->
             <div class="mb-4 text-center">
-                <h1 class="text-3xl font-poppins font-medium text-gray-700">Daftar Micro Services</h1>
+                <h1 class="text-3xl font-poppins font-medium text-gray-700">Daftar CuySolustions</h1>
             </div>
             
             <button class="inline-flex justify-between border  text-white border-blue-600 items-center px-4 py-2 bg-blue-600 transition ease-in-out delay-75 hover:bg-white hover:text-blue-600 text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110">
