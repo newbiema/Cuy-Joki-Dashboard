@@ -21,6 +21,9 @@ $stmt->bind_result($username, $email, $password, $profile_pic);
 $stmt->fetch();
 $stmt->close(); // Menutup statement setelah selesai
 
+// Variabel untuk status update
+$update_success = false;
+
 // Cek jika form di-submit
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $new_username = $_POST['username'];
@@ -32,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Proses untuk memperbarui password jika diubah
     if (!empty($new_password)) {
-        $new_password = password_hash($new_password, PASSWORD_DEFAULT); // Enkripsi password baru
+        $new_password = md5($new_password); // Enkripsi password baru
     } else {
         $new_password = $password; // Jika password kosong, gunakan password lama
     }
@@ -57,8 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Eksekusi query update
     if ($stmt->execute()) {
         $_SESSION['username'] = $new_username; // Simpan username baru ke session
-        header("Location: user_dashboard.php"); // Redirect ke dashboard setelah berhasil
-        exit();
+        $update_success = true; // Set flag success
     } else {
         echo "Terjadi kesalahan dalam memperbarui data.";
     }
@@ -67,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $conn->close();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,6 +77,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/output.css">
     <title>Edit Profil</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-gray-100 font-poppins text-gray-900">
 
@@ -110,6 +114,20 @@ $conn->close();
             <button type="submit" class="w-full px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-300">Update Profil</button>
         </form>
     </div>
+
+    <!-- SweetAlert Notification -->
+    <?php if ($update_success): ?>
+    <script>
+        Swal.fire({
+            title: 'Berhasil!',
+            text: 'Profil Anda telah diperbarui.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            window.location.href = 'user_dashboard.php';
+        });
+    </script>
+    <?php endif; ?>
 
 </body>
 </html>

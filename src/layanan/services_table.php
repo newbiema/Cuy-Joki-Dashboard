@@ -33,9 +33,16 @@
                 </li>
                 <li>
                     <a href="../admin/admin_tabel.php" class="flex items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
-                        <img src="../img/home.png" class="h-5" alt="icon home"> <span>Lihat Admin</span>
+                        <img src="../img/admin.png" class="h-5" alt="icon home"> <span>Lihat Admin</span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="../user_tabel/user_tabel.php" class="flex items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
+                        <img src="../img/user.png" class="h-5" alt="icon services"> <span>Lihat User</span>
+                    </a>
+                </li>
+
                 <li>
                     <a href="admin_services.php" class="flex text-blue-600 bg-white items-center space-x-3 hover:bg-blue-700 hover:text-white p-3 rounded-lg transition-colors">
                         <img src="../img/services.png" class="h-5" alt="icon services"> <span>Lihat Services</span>

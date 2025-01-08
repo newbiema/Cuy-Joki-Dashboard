@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     showConfirmButton: false
                 });
                 setTimeout(function() {
-                    window.location.href = 'user/user_dashboard.php';
+                    window.location.href = 'user_view/user_dashboard.php';
                 }, 2000);
             </script>";
             exit();

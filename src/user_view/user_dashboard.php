@@ -28,6 +28,16 @@ $stmt->close();
 $profile_pic = $profile_pic ? $profile_pic : 'default_profil.jpeg';
 ?>
 
+<?php
+// Ambil riwayat pesanan berdasarkan user_id
+$query_orders = "SELECT * FROM orders WHERE user_id = ?";
+$stmt_orders = $conn->prepare($query_orders);
+$stmt_orders->bind_param("i", $user_id);
+$stmt_orders->execute();
+$result_orders = $stmt_orders->get_result();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +55,7 @@ $profile_pic = $profile_pic ? $profile_pic : 'default_profil.jpeg';
     <div class="w-64 bg-blue-500 h-full p-6">
         <a href="https://cuyjoki.vercel.app/" class="flex items-center space-x-3 mb-6">
             <img src="../img/logo.png" class="h-8" alt="Logo CuyJoki" />
-            <span class="text-2xl font-poppins font-bold text-white">Micro Services</span>
+            <span class="text-2xl font-poppins font-bold text-white">CuySolutions</span>
         </a>
         <div class="text-white space-y-4">
             <!-- Menampilkan foto profil pengguna -->
@@ -72,12 +82,13 @@ $profile_pic = $profile_pic ? $profile_pic : 'default_profil.jpeg';
         <div class="hidden lg:flex items-center space-x-3 text-white">
             <!-- Menampilkan foto profil pengguna -->
             <img src="<?php echo htmlspecialchars("../img/uploads/$profile_pic"); ?>" class="h-8 w-8 rounded-full" alt="Profile Picture">
-            <span class="text-sm"><?php echo htmlspecialchars($user_name); ?></span>
+            <span class="text-sm font-bold text-yellow-300"><?php echo htmlspecialchars($user_name); ?></span> <!-- Menonjolkan username -->
             <a href="edit_profil.php" class="text-white text-sm hover:text-blue-300">Edit Profil</a>
             <a href="logout.php" class="text-white text-sm hover:text-blue-300">Logout</a>
         </div>
     </div>
 </nav>
+
 
 <!-- Main Content -->
 <div class="max-w-screen-xl mx-auto mt-10 px-4">
@@ -101,7 +112,7 @@ $profile_pic = $profile_pic ? $profile_pic : 'default_profil.jpeg';
                         <img src='../img/jasa.jpg' alt='Service Icon' class='w-16 h-16 mb-4'>
                         <h2 class='text-lg font-semibold text-gray-800 mb-3 text-center'>{$row['nama_layanan']}</h2>
                         <p class='text-sm text-gray-600 text-center mb-4 overflow-hidden text-ellipsis' style='max-height: 4rem;'>{$row['deskripsi']}</p>
-                        <a href='order_service.php?id={$row['id']}' class='inline-block px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 transition duration-300'>
+                        <a href='order_services.php?id={$row['id']}' class='inline-block px-6 py-3 text-sm font-medium text-white bg-blue-600 rounded-full hover:bg-blue-700 transition duration-300'>
                             Pesan Jasa
                         </a>
                     </div>
@@ -115,6 +126,48 @@ $profile_pic = $profile_pic ? $profile_pic : 'default_profil.jpeg';
         ?>
     </div>
 </div>
+
+<!-- Order History Section -->
+<div class="max-w-screen-xl mx-auto mt-10 px-4">
+    <h2 class="text-2xl font-bold text-gray-700 mb-6">Riwayat Pesanan</h2>
+    <div class="bg-white p-6 rounded-lg shadow-md">
+    <?php if ($result_orders->num_rows > 0): ?>
+    <table class="w-full text-left border-collapse">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b">ID Pesanan</th>
+                <th class="py-2 px-4 border-b">Layanan</th>
+                <th class="py-2 px-4 border-b">Tanggal</th>
+                <th class="py-2 px-4 border-b">Deadline</th>
+                <th class="py-2 px-4 border-b">Status</th>
+                <th class="py-2 px-4 border-b">Harga</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($order = $result_orders->fetch_assoc()): ?>
+                <tr>
+                    <td class="py-2 px-4 border-b"><?php echo htmlspecialchars($order['id']); ?></td>
+                    <td class="py-2 px-4 border-b"><?php echo htmlspecialchars($order['nama_service']); ?></td>
+                    <td class="py-2 px-4 border-b"><?php echo htmlspecialchars($order['order_date']); ?></td>
+                    <td class="py-2 px-4 border-b"><?php echo htmlspecialchars($order['deadline']); ?></td>
+                    <td class="py-2 px-4 border-b">
+                        <span class="px-2 py-1 text-sm rounded-lg 
+                        <?php echo $order['status'] == 'Selesai' ? 'bg-green-200 text-green-800' : 'bg-yellow-200 text-yellow-800'; ?>">
+                        <?php echo htmlspecialchars($order['status']); ?>
+                    </span>
+                </td>
+                <td class="py-2 px-4 border-b"><?php echo htmlspecialchars($order['total_price']); ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+<?php else: ?>
+    <p class="text-gray-500">Anda belum memiliki pesanan.</p>
+<?php endif; ?>
+
+    </div>
+</div>
+
 
 <!-- Footer -->
 <footer class="mt-10 text-center text-gray-500">

@@ -13,7 +13,7 @@
         <div class="max-w-screen-xl mx-auto flex justify-between items-center">
             <a href="https://cuyjoki.vercel.app/" class="flex items-center space-x-3">
                 <img  src="../img/logo.png" class="h-8 " alt="Logo CuyJoki" />
-                <span class="text-2xl font-poppins font-bold text-white ">CuySolutions</span>
+                <span class="text-2xl font-poppins font-bold text-white ">Micro Services</span>
             </a>
         </div>
     </nav>
@@ -34,13 +34,13 @@
 
                 
                 <li>
-                    <a href="admin_tabel.php" class="flex text-blue-600 bg-white items-center space-x-3 hover:bg-blue-700 hover:text-white p-3 rounded-lg transition-colors">
+                    <a href="../admin/admin_tabel.php" class="flex  items-center space-x-3 hover:bg-blue-700 hover:text-white p-3 rounded-lg transition-colors">
                         <img src="../img/admin.png" class="h-5" alt="icon services"> <span>Lihat Admin</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="../user_tabel/user_tabel.php" class="flex items-center space-x-3 hover:bg-blue-700 p-3 rounded-lg transition-colors">
+                    <a href="user_tabel.php" class="flex text-blue-600 bg-white items-center space-x-3 hover:bg-blue-700 hover:text-white p-3 rounded-lg transition-colors">
                         <img src="../img/user.png" class="h-5" alt="icon services"> <span>Lihat User</span>
                     </a>
                 </li>
@@ -63,44 +63,40 @@
         <div class="flex-1 p-6 bg-white rounded-r-lg shadow-md">
             <!-- Header Section -->
             <div class="mb-4 text-center">
-                <h1 class="text-3xl font-poppins font-medium text-gray-700">Daftar Micro Services</h1>
+                <h1 class="text-3xl font-poppins font-medium text-gray-700">Daftar User</h1>
             </div>
-            
-            <button class="inline-flex justify-between border  text-white border-blue-600 items-center px-4 py-2 bg-blue-600 transition ease-in-out delay-75 hover:bg-white hover:text-blue-600 text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110">
-                <img class="h-5" src="img/add.png" alt="">
-                    <a class="p-1" href="add_admin.php">
-                        Add Admin
-                    </a>
-            </button>
-
-
 
             <!-- Tabel Daftar Joki -->
             <div class="overflow-x-auto mt-4">
                 <table class="w-full text-sm text-left text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-200">
                         <tr>
+                            <th class="px-6 py-3">Id</th>
                             <th class="px-6 py-3">Username</th>
+                            <th class="px-6 py-3">Email</th>
                             <th class="px-6 py-3">Password</th>
-                            <th class="px-6 py-3">Aksi</th>
+                            <th class="px-6 py-3">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         include '../services/db.php';
 
-                        // Query untuk menampilkan daftar joki
-                        $query = "SELECT * FROM admin";
+                        // Query untuk menampilkan user
+                        $query = "SELECT * FROM users";
                         $result = $conn->query($query);
 
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr class='bg-white border-b hover:bg-gray-100 transition duration-150'>";
+                                echo "<td class='px-6 py-4'>" . $row['id'] . "</td>";
                                 echo "<td class='px-6 py-4'>" . $row['username'] . "</td>";
+                                echo "<td class='px-6 py-4'>" . $row['email'] . "</td>";
                                 echo "<td class='px-6 py-4'>" . $row['password'] . "</td>";
+
                                 echo "<td class='px-6 py-4 space-x-2'>
-                                        <a href='edit_admin.php?id=" . $row['id'] . "' class='text-blue-500 hover:text-blue-700'><img class='h-5' src='../img/edit.png' alt='icon edit'></a>
-                                        <a href='delete_admin.php?id=" . $row['id'] . "' class='text-red-500 hover:text-red-700 delete-link'><img class='h-5' src='../img/delete.png' alt='icon delete'></a>
+                                        <a href='edit_user.php?id=" . $row['id'] . "' class='text-blue-500 hover:text-blue-700'><img class='h-5' src='../img/edit.png' alt='icon edit'></a>
+                                        <a href='delete_user.php?id=" . $row['id'] . "' class='text-red-500 hover:text-red-700 delete-link'><img class='h-5' src='../img/delete.png' alt='icon delete'></a>
                                       </td>";
                                 echo "</tr>";
                             }
@@ -145,7 +141,7 @@
                     cancelButtonText: "Batal"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = `delete_admin.php?id=${id}`;
+                        window.location.href = `delete_user.php?id=${id}`;
                     }
                 });
             });

@@ -67,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com'; // Host SMTP
                 $mail->SMTPAuth = true;
-                $mail->Username = 'evanjamaq123@gmail.com'; // Ganti dengan email Anda
-                $mail->Password = 'dtto ulgb ntal cnkp';       // Ganti dengan password email Anda
+                $mail->Username = 'evanjamaq123@gmail.com'; // email Anda
+                $mail->Password = 'dtto ulgb ntal cnkp';       // password email Anda
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port = 587;
 
